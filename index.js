@@ -6,10 +6,14 @@ import rotuerTypeUsers from './router/TypeUsersRouter.js';
 import  { RouterUsuer } from './router/UserRouter.js';
 import { sequelize } from "./db/conexion.js";
 import { RouterComment } from './router/CommentRouter.js';
-const _PORT = PORT || 3000;
+
+const _PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
-app.use(cors());   
+app.use(cors({
+    origin: ['http://localhost:8100', 'https://backendcine-production.up.railway.app'],
+  credentials: true
+}));
 
 app.use('/api', rotuerTypeUsers);
 app.use('/api', RouterUsuer);
